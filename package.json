@@ -1,0 +1,62 @@
+{
+  "name": "example-language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.66.0"
+  },
+  "author": {
+    "name": "Jens Döllmann",
+    "email": "jens@doellmann.com",
+    "url": "https://github.com/JensDll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JensDll/vscode-link-detection"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "example-language",
+        "extensions": [
+          ".exlang"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "example-language",
+        "scopeName": "text.exlang",
+        "path": "./syntaxes/exlang.tmLanguage.json"
+      }
+    ]
+  },
+  "activationEvents": [
+    "onLanguage:example-language"
+  ],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "vscode:prepublish": "pnpm run build",
+    "dev": "pnpm exec rollup --config --watch --configPlugin esbuild --no-treeshake --environment BUILD:development",
+    "build": "pnpm exec rollup --config --configPlugin esbuild --environment BUILD:production",
+    "package": "pnpm exec vsce package -o example-language.vsix --no-dependencies",
+    "lint": "pnpm exec eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@esbuild-kit/esm-loader": "2.5.4",
+    "@rollup/plugin-alias": "4.0.2",
+    "@rollup/plugin-node-resolve": "15.0.1",
+    "@rollup/plugin-replace": "5.0.1",
+    "@types/node": "18.11.13",
+    "@types/vscode": "1.66.0",
+    "@typescript-eslint/eslint-plugin": "5.46.1",
+    "@typescript-eslint/parser": "5.46.1",
+    "@vscode/vsce": "2.15.0",
+    "esbuild": "0.16.4",
+    "eslint": "8.29.0",
+    "eslint-plugin-import": "2.26.0",
+    "prettier": "2.8.1",
+    "rollup": "3.7.3",
+    "rollup-plugin-esbuild": "5.0.0",
+    "typescript": "4.9.4"
+  }
+}

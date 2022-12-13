@@ -1,0 +1,11 @@
+.vscode/
+node_modules/
+playground/
+scripts/
+src/
+*.yaml
+*.yml
+*.vsix
+*.ts
+.gitignore
+tsconfig.json
