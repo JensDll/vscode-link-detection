@@ -6,8 +6,13 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
   ): vscode.ProviderResult<vscode.DocumentLink[]> {
     const result: vscode.DocumentLink[] = []
 
-    const activePath = vscode.workspace.getWorkspaceFolder(document.uri)!.uri
-      .path
+    const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri)
+
+    if (!workspaceFolder) {
+      return
+    }
+
+    const activePath = workspaceFolder.uri.path
     const regex = createRegexForPath(activePath)
 
     for (let i = 0; i < document.lineCount; ++i) {
@@ -41,7 +46,6 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
         }
 
         const linkTarget = vscode.Uri.from(components)
-
         const link = new vscode.DocumentLink(linkRange, linkTarget)
 
         result.push(link)
@@ -53,10 +57,7 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
 
   static register(context: vscode.ExtensionContext) {
     const disposable = vscode.languages.registerDocumentLinkProvider(
-      {
-        language: 'example-language',
-        scheme: 'file'
-      },
+      { language: 'example-language' },
       new LinkProvider()
     )
 
@@ -64,9 +65,6 @@ export class LinkProvider implements vscode.DocumentLinkProvider {
   }
 }
 
-function createRegexForPath(activePath: string) {
-  return new RegExp(
-    `(?:(${activePath}\\S+?):(\\d+(?::\\d+)?))|(${activePath}\\S+)`,
-    'g'
-  )
+function createRegexForPath(path: string) {
+  return new RegExp(`(?:(${path}\\S+?):(\\d+(?::\\d+)?))|(${path}\\S+)`, 'g')
 }
