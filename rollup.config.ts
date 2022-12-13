@@ -49,7 +49,6 @@ const configs: RollupOptionsWithPlugins[] = [
       dir: 'dist',
       format: 'cjs',
       interop: 'esModule',
-
       sourcemap: !IS_PRODUCTION,
       entryFileNames: '[name].js',
       chunkFileNames: '[name].js',
