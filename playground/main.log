@@ -1,5 +1,5 @@
 
-NO_BUILT_IN_FS_LINK_DETECTION
+BUILT_IN_FS_LINK_DETECTION
 
 /home/jens/src/vscode/vscode-link-detection/playground/file.txt /home/jens/src/vscode/vscode-link-detection/playground/file.txt:4
 /home/jens/src/vscode/vscode-link-detection/playground/file.txt:3:2
